@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import React from "react";
 
 const SmallBtn = () => {
   return <SmallButton>작성하기</SmallButton>;
