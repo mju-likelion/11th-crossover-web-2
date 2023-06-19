@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
-const LargeBtn = () => {
-  return <LargeButton isFull={true}>로그인</LargeButton>;
+const LargeBtn = (props) => {
+  const { children } = props;
+  return <LargeButton isFull={true}>{children}</LargeButton>;
 };
 
 const LargeButton = styled.button`
   width: 540px;
   height: 90px;
-  background-color: green; // 이후 색상 변경 예정
+  background-color: ${(props) =>
+    props.isFull ? props.theme.colors.BLUE2 : props.theme.colors.BLUE1};
   border-radius: 25px;
   color: #ffffff;
   font-size: 36px;

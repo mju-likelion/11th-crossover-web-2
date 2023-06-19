@@ -1,13 +1,14 @@
 import styled from "styled-components";
 
-const SmallBtn = () => {
-  return <SmallButton>작성하기</SmallButton>;
+const SmallBtn = (props) => {
+  const { children, color } = props;
+  return <SmallButton color={color}>{children}</SmallButton>;
 };
 
 const SmallButton = styled.button`
   width: 233px;
   height: 70px;
-  background-color: #99ceff; // props로 색상 변경 예정
+  background-color: ${(props) => props.color};
   border-radius: 25px;
   color: #ffffff;
   font-size: 21px;

@@ -10,9 +10,9 @@ function App() {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
-      <Header />
-      <LargeBtn />
-      <SmallBtn />
+      <Header isLoggedin={true} />
+      <LargeBtn>로그인</LargeBtn>
+      <SmallBtn color="orange">작성하기</SmallBtn>
     </ThemeProvider>
   );
 }
