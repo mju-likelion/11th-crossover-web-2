@@ -1,25 +1,17 @@
-import { useState } from "react";
 import styled from "styled-components";
-import Cancle from "../assets/images/Cancle";
-import Error from "../assets/images/Error";
-import Success from "../assets/images/Success";
+import { Theme } from "../styles/Theme";
 
 export default function Input({ inputName }) {
-  const [inputCheck, setInputCheck] = useState(false);
-  const [inputState, setInputState] = useState(false);
-
   return (
     <>
-      <InputLoginContainer>
-        <InputLogin placeholder={inputName} />
-        {inputCheck ? <Success /> : <Error />}
-        {inputState ? "" : <Cancle />}
-      </InputLoginContainer>
+      <InputContainer color={Theme.colors.GRAY}>
+        <InputText placeholder={inputName} />
+      </InputContainer>
     </>
   );
 }
 
-const InputLoginContainer = styled.div`
+const InputContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +26,7 @@ const InputLoginContainer = styled.div`
   line-height: 28px;
 `;
 
-const InputLogin = styled.input`
+const InputText = styled.input`
   width: 440px;
   height: 24px;
   border: none;
