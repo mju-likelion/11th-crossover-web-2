@@ -34,5 +34,3 @@ const InputText = styled.input`
   font-size: 20px;
   line-height: 28px;
 `;
-
-const SuccessCheck = styled.div``;
