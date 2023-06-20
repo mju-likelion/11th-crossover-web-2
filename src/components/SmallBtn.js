@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-const SmallBtn = (props) => {
-  const { children, color } = props;
+const SmallBtn = ({ children, color }) => {
   return <SmallButton color={color}>{children}</SmallButton>;
 };
 

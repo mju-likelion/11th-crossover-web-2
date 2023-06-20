@@ -12,7 +12,7 @@ function App() {
       <GlobalStyle />
       <Header isLoggedin={true} />
       <LargeBtn>로그인</LargeBtn>
-      <SmallBtn color="orange">작성하기</SmallBtn>
+      <SmallBtn color="green">작성하기</SmallBtn>
     </ThemeProvider>
   );
 }
