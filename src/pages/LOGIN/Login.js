@@ -101,7 +101,7 @@ export default function Login() {
             로그인
           </LargeBtn>
         </LoginForm>
-        <Link to="/singnup">
+        <Link to="/signup">
           <SignupBtn>회원가입</SignupBtn>
         </Link>
       </LoginContainer>

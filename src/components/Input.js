@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Theme } from "../styles/Theme";
 import Error from "../assets/images/Error";
 import Cancel from "../assets/images/Cancel";
-
+import Success from "../assets/images/Success";
 export default function Input({
   inputName,
   inputType,
@@ -19,15 +19,17 @@ export default function Input({
   };
   return (
     <>
-      <InputContainer errorsCheck={messageCheck}>
+      <InputContainer errorsCheck={messageCheck} value={inputValue[name]}>
         <InputText
           name={inputName}
           placeholder={inputName}
           type={inputType}
           {...register(name)}
           errorsCheck={messageCheck}
+          value={inputValue[name]}
         />
         {messageCheck && <Error />}
+        {inputValue[name] && !messageCheck && <Success />}
         {inputValue[name] && (
           <CancelButton type="button" onClick={handleInputBox}>
             <Cancel />
@@ -47,7 +49,11 @@ const InputContainer = styled.div`
   background-color: #ffffff;
   border-radius: 25px;
   border: 2px solid
-    ${(props) => (props.errorsCheck ? Theme.colors.RED : Theme.colors.GRAY)};
+    ${(props) => {
+      if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
+      else if (props.errorsCheck) return Theme.colors.RED;
+      else return Theme.colors.GRAY;
+    }};
   padding: 29px 27px;
   font-weight: 500;
   font-size: 20px;
@@ -62,7 +68,11 @@ const InputText = styled.input`
   font-weight: 500;
   font-size: 20px;
   line-height: 28px;
-  color: ${(props) => (props.errorsCheck ? Theme.colors.RED : "black")};
+  color: ${(props) => {
+    if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
+    else if (props.errorsCheck) return Theme.colors.RED;
+    else return Theme.colors.GRAY;
+  }};
 `;
 
 const CancelButton = styled.button``;
