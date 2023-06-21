@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import Airplane from "../assets/images/airplane.svg";
 import Logout from "../assets/images/logout.svg";
@@ -7,10 +8,12 @@ const Header = (props) => {
   return (
     <HeaderBar>
       <Align>
-        <Logo>
-          <LogoText>비행기레터</LogoText>
-          <AirPlaneImg src={Airplane} alt="AirplaneImg" />
-        </Logo>
+        <Link to="/">
+          <Logo>
+            <LogoText>비행기레터</LogoText>
+            <AirPlaneImg src={Airplane} alt="AirplaneImg" />
+          </Logo>
+        </Link>
         {isLoggedin && <LogoutImg src={Logout} alt="LogoutImg" />}
       </Align>
     </HeaderBar>
