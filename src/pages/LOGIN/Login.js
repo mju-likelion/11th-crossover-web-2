@@ -70,7 +70,7 @@ export default function Login() {
             errors={errors}
           />
           {handleLogin("id") && <LoginError>{errors.id.message}</LoginError>}
-          {!value.id && (
+          {!value.id && !errors.id && (
             <LoginText>
               영문과 숫자을 조합하여 5~10글자 미만으로 입력하여 주세요.
             </LoginText>
@@ -89,7 +89,7 @@ export default function Login() {
           {handleLogin("password") && (
             <LoginError>{errors.password.message}</LoginError>
           )}
-          {!value.password && (
+          {!value.password && !errors.password && (
             <LoginText>
               영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력하여
               주세요.
