@@ -76,10 +76,13 @@ export default function Signup() {
             errors={errors}
           />
           {errors.id && <SignupError>{errors.id.message}</SignupError>}
-          {!value.id && (
+          {!value.id && !errors.id && (
             <SignupText>
               영문과 숫자을 조합하여 5~10글자 미만으로 입력하여 주세요.
             </SignupText>
+          )}
+          {!errors.id && value.id && (
+            <SignupSuccess>사용 가능한 아이디 입니다 </SignupSuccess>
           )}
           <Input
             page="signup"
@@ -95,11 +98,14 @@ export default function Signup() {
           {errors.password && (
             <SignupError>{errors.password.message}</SignupError>
           )}
-          {!value.password && (
+          {!value.password && !errors.password && (
             <SignupText>
               영문과 숫자, 특수기호를 조합하여 8~14 글자 미만으로 입력하여
               주세요.
             </SignupText>
+          )}
+          {!errors.password && value.password && (
+            <SignupSuccess>사용 가능한 비밀번호 입니다.</SignupSuccess>
           )}
           <Input
             page="signup"
@@ -113,10 +119,11 @@ export default function Signup() {
             errors={errors}
           />
           {errors.email && <SignupError>{errors.email.message}</SignupError>}
-          {!value.email && (
-            <SignupText>
-              영문과 숫자을 조합하여 5~10글자 미만으로 입력하여 주세요.
-            </SignupText>
+          {!value.email && !errors.email && (
+            <SignupText>사용하실 이메일을 입력해주세요.</SignupText>
+          )}
+          {!errors.email && value.email && (
+            <SignupSuccess>사용 가능한 이메일 입니다.</SignupSuccess>
           )}
           <SignupAgreeContainer>
             <AgreeTitleContatiner>
@@ -199,6 +206,17 @@ const SignupError = styled.div`
   font-size: 16px;
   line-height: 19px;
   color: ${({ theme }) => theme.colors.RED};
+`;
+
+const SignupSuccess = styled.div`
+  text-align: left;
+  width: 495px;
+  height: 19px;
+  margin: 10px 22.5px 21px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 19px;
+  color: ${({ theme }) => theme.colors.GREEN};
 `;
 
 const SignupAgreeContainer = styled.div`
