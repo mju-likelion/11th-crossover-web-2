@@ -4,6 +4,8 @@ import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import LargeBtn from "../../components/LargeBtn";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [checkLogin, setCheckLogin] = useState(false);
@@ -35,8 +37,8 @@ export default function Login() {
     mode: "onChange",
   });
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   const handleClick = () => {
@@ -51,7 +53,6 @@ export default function Login() {
   };
 
   const value = watch();
-  console.log(value);
 
   return (
     <>
@@ -93,10 +94,16 @@ export default function Login() {
               주세요.
             </LoginText>
           )}
-          <button type="button" onClick={handleClick}>
-            button
-          </button>
+          <LargeBtn
+            click={handleClick}
+            checkSubmit={value.id && value.password}
+          >
+            로그인
+          </LargeBtn>
         </LoginForm>
+        <Link to="/singnup">
+          <SignupBtn>회원가입</SignupBtn>
+        </Link>
       </LoginContainer>
     </>
   );
@@ -141,4 +148,12 @@ const LoginError = styled.div`
   font-size: 16px;
   line-height: 19px;
   color: ${({ theme }) => theme.colors.RED};
+`;
+
+const SignupBtn = styled.button`
+  margin-top: 31px;
+  margin-left: 430px;
+  font-weight: 500;
+  font-size: 24px;
+  color: ${({ theme }) => theme.colors.GRAY};
 `;

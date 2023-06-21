@@ -2,19 +2,22 @@ import { ThemeProvider } from "styled-components";
 import { Theme } from "./styles/Theme";
 import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
-import Input from "./components/Input";
-import LargeBtn from "./components/LargeBtn";
-import SmallBtn from "./components/SmallBtn";
 import Header from "./components/Header";
+import Login from "./pages/LOGIN/Login";
+import Signup from "./pages/JOIN/Signup";
 
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
-      <Input inputName="아이디" />
       <Header isLoggedin={true} />
-      <LargeBtn>로그인</LargeBtn>
-      <SmallBtn color="green">작성하기</SmallBtn>
+      <Router>
+        <Routes>
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }
