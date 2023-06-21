@@ -1,4 +1,4 @@
-export default function Cancle({ width = "32", height = "32" }) {
+export default function Cancel({ width = "32", height = "32" }) {
   return (
     <svg
       width={width}
