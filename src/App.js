@@ -5,6 +5,9 @@ import GlobalStyle from "./styles/GlobalStyle";
 import Header from "./components/Header";
 import Login from "./pages/LOGIN/Login";
 import Signup from "./pages/JOIN/Signup";
+import Main from "./pages/MAIN/Main";
+
+
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
