@@ -7,13 +7,15 @@ const Main = () => {
   return (
     <Center>
       <WriteBtn>
-        {/* <Link to="/post"> */}
-        <SmallBtn color={(props) => props.theme.colors.BLUE2}>
-          작성하기
-        </SmallBtn>
-        {/* </Link> */}
+        <Link to="/post">
+          <SmallBtn color={(props) => props.theme.colors.BLUE2}>
+            작성하기
+          </SmallBtn>
+        </Link>
       </WriteBtn>
-      <Content title="하이염" detail="내꺼임" time="13:00" isMine={true} />
+      <Link to="/content">
+        <Content title="하이염" detail="내꺼임" time="13:00" isMine={true} />
+      </Link>
       <Content title="ㅋㅋ" detail="내용2" time="15:00" isMine={false} />
     </Center>
   );

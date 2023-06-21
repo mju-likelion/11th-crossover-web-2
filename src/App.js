@@ -7,6 +7,8 @@ import Header from "./components/Header";
 import Login from "./pages/LOGIN/Login";
 import Signup from "./pages/JOIN/Signup";
 import Main from "./pages/MAIN/Main";
+import Post from "./pages/POST/Post";
+import Content from "./pages/CONTENT/Content";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -20,7 +22,8 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/Login" element={<Login />} />
           <Route path="/Signup" element={<Signup />} />
-          {/* <Route path="/Post" element={<Post/>}/> */}
+          <Route path="/Post" element={<Post />} />
+          <Route path="/Content" element={<Content />} />
         </Routes>
       </Router>
     </ThemeProvider>
