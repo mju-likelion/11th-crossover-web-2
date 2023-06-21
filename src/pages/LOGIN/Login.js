@@ -34,7 +34,6 @@ export default function Login() {
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
-    mode: "onChange",
   });
 
   const onSubmit = (data) => {
@@ -60,6 +59,7 @@ export default function Login() {
         <LoginTitle> 로그인</LoginTitle>
         <LoginForm onSubmit={handleSubmit(onSubmit)}>
           <Input
+            page="login"
             inputName="아이디"
             inputType="text"
             register={register}
@@ -76,6 +76,7 @@ export default function Login() {
             </LoginText>
           )}
           <Input
+            page="login"
             inputName="비밀번호"
             inputType="password"
             register={register}

@@ -65,6 +65,7 @@ export default function Signup() {
         <SignupTitle> 회원가입</SignupTitle>
         <SignupForm onSubmit={handleSubmit(onSubmit)}>
           <Input
+            page="signup"
             inputName="아이디"
             inputType="text"
             register={register}
@@ -81,6 +82,7 @@ export default function Signup() {
             </SignupText>
           )}
           <Input
+            page="signup"
             inputName="비밀번호"
             inputType="password"
             register={register}
@@ -100,6 +102,7 @@ export default function Signup() {
             </SignupText>
           )}
           <Input
+            page="signup"
             inputName="이메일"
             inputType="text"
             register={register}
