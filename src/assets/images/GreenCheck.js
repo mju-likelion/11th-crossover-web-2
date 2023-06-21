@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Success({ width = "32", height = "32" }) {
+export default function GreenCheck({ width = "32", height = "32" }) {
   return (
     <svg
       width={width}
@@ -8,19 +8,18 @@ export default function Success({ width = "32", height = "32" }) {
       viewBox="0 0 32 32"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      style={{ marginRight: 10 + "px" }}
     >
-      <g clipPath="url(#clip0_5_178)">
-        <circle cx="16" cy="16" r="15" stroke="#2BCD3B" strokeWidth="2" />
+      <g clipPath="url(#clip0_9_359)">
+        <rect width="32" height="32" rx="4" fill="#2BCD3B" />
         <path
-          d="M8 14L14.5 23L22.5 10"
-          stroke="#2BCD3B"
+          d="M8 12.6154L15.6207 23L25 8"
+          stroke="white"
           strokeWidth="2"
           strokeLinecap="round"
         />
       </g>
       <defs>
-        <clipPath id="clip0_5_178">
+        <clipPath id="clip0_9_359">
           <rect width="32" height="32" fill="white" />
         </clipPath>
       </defs>

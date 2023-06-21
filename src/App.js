@@ -3,14 +3,26 @@ import { Theme } from "./styles/Theme";
 import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
 import Header from "./components/Header";
-import Post from "./pages/POST/Post";
+
+import Login from "./pages/LOGIN/Login";
+import Signup from "./pages/JOIN/Signup";
+import Main from "./pages/MAIN/Main";
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
-      <Header isLoggedin={true} />
-      <Post title="안녕" />
+      <Router>
+        <Header isLoggedin={true} />
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+          {/* <Route path="/Post" element={<Post/>}/> */}
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }
