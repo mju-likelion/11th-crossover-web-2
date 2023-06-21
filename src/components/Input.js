@@ -4,6 +4,7 @@ import Error from "../assets/images/Error";
 import Cancel from "../assets/images/Cancel";
 import Success from "../assets/images/Success";
 export default function Input({
+  page,
   inputName,
   inputType,
   register,
@@ -17,9 +18,14 @@ export default function Input({
     setValue(name, "");
     errors[name] = "";
   };
+
   return (
     <>
-      <InputContainer errorsCheck={messageCheck} value={inputValue[name]}>
+      <InputContainer
+        errorsCheck={messageCheck}
+        value={inputValue[name]}
+        page={page}
+      >
         <InputText
           name={inputName}
           placeholder={inputName}
@@ -27,9 +33,10 @@ export default function Input({
           {...register(name)}
           errorsCheck={messageCheck}
           value={inputValue[name]}
+          page={page}
         />
         {messageCheck && <Error />}
-        {inputValue[name] && !messageCheck && <Success />}
+        {page == "signup" && inputValue[name] && !messageCheck && <Success />}
         {inputValue[name] && (
           <CancelButton type="button" onClick={handleInputBox}>
             <Cancel />
@@ -50,9 +57,16 @@ const InputContainer = styled.div`
   border-radius: 25px;
   border: 2px solid
     ${(props) => {
-      if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
-      else if (props.errorsCheck) return Theme.colors.RED;
-      else return Theme.colors.GRAY;
+      if (props.page == "signup") {
+        if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
+        else if (props.errorsCheck) return Theme.colors.RED;
+        else return Theme.colors.GRAY;
+      } else {
+        if (props.errorsCheck) return Theme.colors.RED;
+        else {
+          return Theme.colors.GRAY;
+        }
+      }
     }};
   padding: 29px 27px;
   font-weight: 500;
@@ -69,9 +83,16 @@ const InputText = styled.input`
   font-size: 20px;
   line-height: 28px;
   color: ${(props) => {
-    if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
-    else if (props.errorsCheck) return Theme.colors.RED;
-    else return Theme.colors.GRAY;
+    if (props.page == "signup") {
+      if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
+      else if (props.errorsCheck) return Theme.colors.RED;
+      else return Theme.colors.GRAY;
+    } else {
+      if (props.errorsCheck) return Theme.colors.RED;
+      else {
+        return Theme.colors.GRAY;
+      }
+    }
   }};
 `;
 
