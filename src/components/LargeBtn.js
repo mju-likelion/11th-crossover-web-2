@@ -1,8 +1,7 @@
 import styled from "styled-components";
 
-const LargeBtn = (props) => {
-  const { children } = props;
-  return <LargeButton isFull={true}>{children}</LargeButton>;
+const LargeBtn = ({ children, isFull }) => {
+  return <LargeButton isFull={isFull}>{children}</LargeButton>;
 };
 
 const LargeButton = styled.button`
