@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     body{
         padding: 0;
         margin: 0;
-        font-family: ‘Noto Sans KR’, sans-serif;
+        font-family: 'Noto Sans KR', sans-serif;
     };
     a{
         text-decoration: none;
