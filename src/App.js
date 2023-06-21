@@ -3,17 +3,24 @@ import { Theme } from "./styles/Theme";
 import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
 import Header from "./components/Header";
+import Login from "./pages/LOGIN/Login";
+import Signup from "./pages/JOIN/Signup";
 import Main from "./pages/MAIN/Main";
 
-// import Input from "./components/Input";
-// import LargeBtn from "./components/LargeBtn";
 
+
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 function App() {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Header isLoggedin={true} />
-      <Main />
+      <Router>
+        <Routes>
+          <Route path="/Login" element={<Login />} />
+          <Route path="/Signup" element={<Signup />} />
+        </Routes>
+      </Router>
     </ThemeProvider>
   );
 }
