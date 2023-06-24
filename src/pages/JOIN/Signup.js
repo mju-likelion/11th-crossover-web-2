@@ -5,14 +5,16 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LargeBtn from "../../components/LargeBtn";
-import { Link } from "react-router-dom";
 import GreenCheck from "../../assets/images/GreenCheck";
 import CheckBox from "../../assets/images/CheckBox";
 import { SignupData } from "../../assets/data/SignupData";
+import { AxiosJoin } from "../../api/Join";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const [checkSignup, setCheckSignup] = useState(false);
   const [buttonCheck, setButtonCheck] = useState(false);
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     id: yup
       .string()
@@ -49,6 +51,12 @@ export default function Signup() {
 
   const onSubmit = (data) => {
     console.log(data);
+
+    const success = () => {
+      alert("회원가입 성공!");
+      navigate("/login");
+    };
+    AxiosJoin(data, success);
   };
 
   const handleClick = () => {

@@ -22,7 +22,7 @@ export default function Input({
   return (
     <>
       <InputContainer
-        errorsCheck={messageCheck}
+        errorscheck={messageCheck}
         value={inputValue[name]}
         page={page}
       >
@@ -31,7 +31,7 @@ export default function Input({
           placeholder={inputName}
           type={inputType}
           {...register(name)}
-          errorsCheck={messageCheck}
+          errorscheck={messageCheck}
           value={inputValue[name]}
           page={page}
         />
@@ -58,11 +58,11 @@ const InputContainer = styled.div`
   border: 2px solid
     ${(props) => {
       if (props.page == "signup") {
-        if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
-        else if (props.errorsCheck) return Theme.colors.RED;
+        if (props.value && !props.errorscheck) return Theme.colors.GREEN;
+        else if (props.errorscheck) return Theme.colors.RED;
         else return Theme.colors.GRAY;
       } else {
-        if (props.errorsCheck) return Theme.colors.RED;
+        if (props.errorscheck) return Theme.colors.RED;
         else {
           return Theme.colors.GRAY;
         }
@@ -84,11 +84,11 @@ const InputText = styled.input`
   line-height: 28px;
   color: ${(props) => {
     if (props.page == "signup") {
-      if (props.value && !props.errorsCheck) return Theme.colors.GREEN;
-      else if (props.errorsCheck) return Theme.colors.RED;
+      if (props.value && !props.errorscheck) return Theme.colors.GREEN;
+      else if (props.errorscheck) return Theme.colors.RED;
       else return Theme.colors.GRAY;
     } else {
-      if (props.errorsCheck) return Theme.colors.RED;
+      if (props.errorscheck) return Theme.colors.RED;
       else {
         return Theme.colors.GRAY;
       }
