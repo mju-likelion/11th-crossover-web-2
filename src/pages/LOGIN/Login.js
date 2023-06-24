@@ -6,10 +6,12 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import LargeBtn from "../../components/LargeBtn";
 import { Link } from "react-router-dom";
+import { AxiosLogin } from "../../api/Login";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const [checkLogin, setCheckLogin] = useState(false);
-
+  const navigate = useNavigate();
   const schema = yup.object().shape({
     id: yup
       .string()
@@ -37,13 +39,13 @@ export default function Login() {
   });
 
   const onSubmit = (data) => {
+    AxiosLogin(data, callbackFunction);
     console.log(data);
   };
 
   const handleClick = () => {
     if (checkLogin == false) {
       setCheckLogin(true);
-      console.log(checkLogin);
     }
   };
 
@@ -52,6 +54,12 @@ export default function Login() {
   };
 
   const value = watch();
+
+  const callbackFunction = (data) => {
+    localStorage.setItem("key", data);
+    alert("로그인에 성공하셨습니다.");
+    navigate("/signup");
+  };
 
   return (
     <>
