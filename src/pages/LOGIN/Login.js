@@ -35,6 +35,7 @@ export default function Login() {
     setValue,
     formState: { errors },
   } = useForm({
+    defaultValues: { id: "", password: "" },
     resolver: yupResolver(schema),
   });
 
@@ -58,8 +59,9 @@ export default function Login() {
   const callbackFunction = (data) => {
     localStorage.setItem("key", data);
     alert("로그인에 성공하셨습니다.");
-    navigate("/signup");
+    navigate("/");
   };
+  console.log(errors);
 
   return (
     <>

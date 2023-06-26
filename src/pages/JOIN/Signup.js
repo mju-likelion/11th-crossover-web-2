@@ -45,6 +45,7 @@ export default function Signup() {
     setValue,
     formState: { errors },
   } = useForm({
+    defaultValues: { id: "", password: "", email: "" },
     resolver: yupResolver(schema),
     mode: "onChange",
   });

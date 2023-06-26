@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "styled-components";
 import SmallBtn from "../../components/SmallBtn";
+import { Theme } from "../../styles/Theme";
 
 const Post = () => {
   const [titleText, setTitleText] = useState("");
@@ -26,7 +27,7 @@ const Post = () => {
         <TitleInput
           onChange={handleTitleText}
           maxLength={20}
-          spellcheck="false"
+          spellCheck="false"
         ></TitleInput>
         <TitleCounting onChange={handleTitleText}>
           ( {titleCount} / 20 )
@@ -36,17 +37,15 @@ const Post = () => {
         <DetailInput
           onChange={handleDetailText}
           maxLength={140}
-          spellcheck="false"
+          spellCheck="false"
         />
         <DetailCounting>( {detailCount} / 140 )</DetailCounting>
       </DetailCotainer>
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
         <SmallBtn
-          color={(props) =>
-            titleText && detailText
-              ? props.theme.colors.BLUE2
-              : props.theme.colors.BLUE1
+          color={
+            titleText && detailText ? Theme.colors.BLUE2 : Theme.colors.BLUE1
           }
         >
           작성하기

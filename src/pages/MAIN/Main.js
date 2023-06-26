@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SmallBtn from "../../components/SmallBtn";
+import { Theme } from "../../styles/Theme";
 import Content from "./Content";
 
 const Main = () => {
@@ -8,9 +9,7 @@ const Main = () => {
     <Center>
       <WriteBtn>
         <Link to="/post">
-          <SmallBtn color={(props) => props.theme.colors.BLUE2}>
-            작성하기
-          </SmallBtn>
+          <SmallBtn color={Theme.colors.BLUE2}>작성하기</SmallBtn>
         </Link>
       </WriteBtn>
       <Link to="/content">

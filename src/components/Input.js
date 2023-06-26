@@ -22,7 +22,7 @@ export default function Input({
   return (
     <>
       <InputContainer
-        errorscheck={messageCheck}
+        errorscheck={messageCheck ? 1 : 0}
         value={inputValue[name]}
         page={page}
       >
@@ -31,7 +31,7 @@ export default function Input({
           placeholder={inputName}
           type={inputType}
           {...register(name)}
-          errorscheck={messageCheck}
+          errorscheck={messageCheck ? 1 : 0}
           value={inputValue[name]}
           page={page}
         />
