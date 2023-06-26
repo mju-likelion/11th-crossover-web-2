@@ -11,18 +11,28 @@ import Main from "./pages/MAIN/Main";
 import Post from "./pages/POST/Post";
 import Content from "./pages/CONTENT/Content";
 
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function App() {
+  const [loginKey, setLoginKey] = useState(false);
+  const accessKey = localStorage.getItem("key");
+  useEffect(() => {
+    if (accessKey) {
+      setLoginKey(true);
+    } else {
+      setLoginKey(false);
+    }
+  }, [accessKey]);
+
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Router>
-        <Header isLoggedin={true} />
+        <Header isLoggedin={loginKey} isCheckLogin={setLoginKey} />
         <Routes>
           <Route path="/" element={<Main />} />
-          <Route path="/Login" element={<Login />} />
+          <Route path="/Login" element={<Login isCheckLogin={setLoginKey} />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Post" element={<Post />} />
           <Route path="/Content" element={<Content />} />

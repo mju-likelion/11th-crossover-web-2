@@ -9,7 +9,8 @@ import { Link } from "react-router-dom";
 import { AxiosLogin } from "../../api/Login";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login(props) {
+  const { isCheckLogin } = props;
   const [checkLogin, setCheckLogin] = useState(false);
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -47,6 +48,7 @@ export default function Login() {
   const handleClick = () => {
     if (checkLogin == false) {
       setCheckLogin(true);
+      isCheckLogin(true);
     }
   };
 
@@ -61,7 +63,6 @@ export default function Login() {
     alert("로그인에 성공하셨습니다.");
     navigate("/");
   };
-  console.log(errors);
 
   return (
     <>
