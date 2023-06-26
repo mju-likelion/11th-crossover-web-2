@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { AxiosPost } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
@@ -18,6 +19,10 @@ const Post = () => {
   const handleDetailText = (e) => {
     setDetailText(e.target.value);
     setDetailCount(e.target.value.length);
+  };
+
+  const handleClick = () => {
+    AxiosPost({ titleText, detailText });
   };
 
   return (
@@ -44,6 +49,7 @@ const Post = () => {
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
         <SmallBtn
+          click={handleClick}
           color={
             titleText && detailText ? Theme.colors.BLUE2 : Theme.colors.BLUE1
           }
