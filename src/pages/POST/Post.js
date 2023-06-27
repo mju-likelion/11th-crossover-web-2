@@ -4,9 +4,11 @@ import { AxiosPost } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
-const Post = () => {
+const Post = (props) => {
+  const { accessKey } = props;
   const [titleText, setTitleText] = useState("");
   const [titleCount, setTitleCount] = useState(0);
+  console.log(accessKey);
 
   const handleTitleText = (e) => {
     setTitleText(e.target.value);
@@ -22,7 +24,7 @@ const Post = () => {
   };
 
   const handleClick = () => {
-    AxiosPost({ titleText, detailText });
+    AxiosPost(titleText, detailText, accessKey);
   };
 
   return (

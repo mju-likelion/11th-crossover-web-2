@@ -34,7 +34,7 @@ function App() {
           <Route path="/" element={<Main />} />
           <Route path="/Login" element={<Login isCheckLogin={setLoginKey} />} />
           <Route path="/Signup" element={<Signup />} />
-          <Route path="/Post" element={<Post />} />
+          <Route path="/Post" element={<Post accessKey={accessKey} />} />
           <Route path="/Content" element={<Content />} />
         </Routes>
       </Router>
