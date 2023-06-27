@@ -3,7 +3,6 @@ import GreyUser from "../../assets/images/greyuser.svg";
 import BlueUser from "../../assets/images/blueuser.svg";
 
 const Content = ({ data }) => {
-  // const { content, createdAt, id, isMine, title, updatedAt } = props.data;
   return data?.map((data) => (
     <PostBox key={data.id}>
       {data.isMine ? (

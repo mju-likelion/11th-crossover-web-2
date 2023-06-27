@@ -6,15 +6,14 @@ import Content from "./Content";
 import { Axios } from "../../api/Axios";
 import { useState, useEffect } from "react";
 
-const Main = (props) => {
-  const { accessKey } = props;
+const Main = () => {
   const [data, setData] = useState([]);
 
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${accessKey}`,
+      Authorization: `Bearer ${localStorage.getItem("key")}`,
     },
   };
 

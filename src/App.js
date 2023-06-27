@@ -31,7 +31,7 @@ function App() {
       <Router>
         <Header isLoggedin={loginKey} isCheckLogin={setLoginKey} />
         <Routes>
-          <Route path="/" element={<Main accessKey={accessKey} />} />
+          <Route path="/" element={<Main />} />
           <Route path="/Login" element={<Login isCheckLogin={setLoginKey} />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Post" element={<Post />} />
