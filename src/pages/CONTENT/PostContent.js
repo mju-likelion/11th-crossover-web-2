@@ -1,18 +1,25 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
-import { AxiosGet } from "../../api/Post";
+import { AxiosDelete, AxiosGet } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
 const PostContent = () => {
   const [postData, setPostData] = useState({});
   const { id } = useParams();
+  const navigate = useNavigate();
   useEffect(() => {
     AxiosGet(id, handleData);
   }, []);
   const handleData = (data) => {
     setPostData(data.data);
+  };
+  const handleDelete = () => {
+    AxiosDelete(id, handleNavigate);
+  };
+  const handleNavigate = () => {
+    navigate("/");
   };
   return (
     <PostBox>
@@ -26,13 +33,15 @@ const PostContent = () => {
       <DetailCotainer>
         <DetailInput>{postData.content} </DetailInput>
         <DetailCounting>
-          ( {postData.content ? postData.content : 0} / 140 )
+          ( {postData.content ? postData.content.length : 0} / 140 )
         </DetailCounting>
       </DetailCotainer>
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
         {postData.isMine && (
-          <SmallBtn color={Theme.colors.GRAY}>삭제하기</SmallBtn>
+          <SmallBtn click={handleDelete} color={Theme.colors.GRAY}>
+            삭제하기
+          </SmallBtn>
         )}
       </WriteBtn>
     </PostBox>

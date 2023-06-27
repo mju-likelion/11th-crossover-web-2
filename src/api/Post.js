@@ -31,3 +31,19 @@ export const AxiosGet = async (data, handleData) => {
     console.log(error);
   }
 };
+
+export const AxiosDelete = async (data, handleNavigate) => {
+  try {
+    const headers = {
+      accept: "application/json",
+      Authorization: `Bearer ${localStorage.getItem("key")}`,
+    };
+    const res = await Axios.delete(`/api/posts/${data}`, {
+      headers: headers,
+    });
+    alert("삭제가 완료 되었습니다");
+    handleNavigate();
+  } catch (error) {
+    alert(error.response.data.message[0]);
+  }
+};
