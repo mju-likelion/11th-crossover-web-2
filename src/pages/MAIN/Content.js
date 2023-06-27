@@ -2,23 +2,22 @@ import styled from "styled-components";
 import GreyUser from "../../assets/images/greyuser.svg";
 import BlueUser from "../../assets/images/blueuser.svg";
 
-const Content = (props) => {
-  const { title, detail, time, isMine } = props;
-
-  return (
-    <PostBox>
-      {isMine ? (
+const Content = ({ data }) => {
+  // const { content, createdAt, id, isMine, title, updatedAt } = props.data;
+  return data?.map((data) => (
+    <PostBox key={data.id}>
+      {data.isMine ? (
         <BlueUserImg src={BlueUser} alt="BlueUserImg" />
       ) : (
         <GreyUserImg src={GreyUser} alt="GreyUserImg" />
       )}
       <DetailBox>
-        <Title>제목: {title}</Title>
-        <Detail>{detail}</Detail>
-        <Time>{time}</Time>
+        <Title>제목: {data.title}</Title>
+        <Detail>{data.content}</Detail>
+        <Time>{data.updatedAt}</Time>
       </DetailBox>
     </PostBox>
-  );
+  ));
 };
 
 const PostBox = styled.div`
