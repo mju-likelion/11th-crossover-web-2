@@ -3,8 +3,30 @@ import styled from "styled-components";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 import Content from "./Content";
+import { Axios } from "../../api/Axios";
+import { useState, useEffect } from "react";
 
-const Main = () => {
+const Main = (props) => {
+  const { accessKey } = props;
+  const [data, setData] = useState([]);
+
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${accessKey}`,
+    },
+  };
+
+  useEffect(() => {
+    Axios("/api/posts", options)
+      .then((res) => {
+        console.log(res.data);
+        setData(res.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Center>
       <WriteBtn>
@@ -13,9 +35,8 @@ const Main = () => {
         </Link>
       </WriteBtn>
       <Link to="/content">
-        <Content title="하이염" detail="내꺼임" time="13:00" isMine={true} />
+        <Content data={data} />
       </Link>
-      <Content title="ㅋㅋ" detail="내용2" time="15:00" isMine={false} />
     </Center>
   );
 };
