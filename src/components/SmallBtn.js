@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-const SmallBtn = ({ children, color }) => {
-  return <SmallButton color={color}>{children}</SmallButton>;
+const SmallBtn = ({ children, color, click }) => {
+  return (
+    <SmallButton onClick={click} color={color}>
+      {children}
+    </SmallButton>
+  );
 };
 
 const SmallButton = styled.button`

@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { AxiosPost } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
 const Post = () => {
+  const navigate = useNavigate();
   const [titleText, setTitleText] = useState("");
   const [titleCount, setTitleCount] = useState(0);
 
@@ -20,6 +23,12 @@ const Post = () => {
     setDetailCount(e.target.value.length);
   };
 
+  const handleClick = () => {
+    AxiosPost({ title: titleText, content: detailText }, handleNavigate);
+  };
+  const handleNavigate = () => {
+    navigate("/");
+  };
   return (
     <PostBox>
       <TitleContainer>
@@ -44,6 +53,7 @@ const Post = () => {
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
         <SmallBtn
+          click={handleClick}
           color={
             titleText && detailText ? Theme.colors.BLUE2 : Theme.colors.BLUE1
           }
