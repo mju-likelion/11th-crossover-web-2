@@ -1,14 +1,14 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AxiosPost } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
-const Post = (props) => {
-  const { accessKey } = props;
+const Post = () => {
+  const navigate = useNavigate();
   const [titleText, setTitleText] = useState("");
   const [titleCount, setTitleCount] = useState(0);
-  console.log(accessKey);
 
   const handleTitleText = (e) => {
     setTitleText(e.target.value);
@@ -24,9 +24,11 @@ const Post = (props) => {
   };
 
   const handleClick = () => {
-    AxiosPost(titleText, detailText, accessKey);
+    AxiosPost({ title: titleText, content: detailText }, handleNavigate);
   };
-
+  const handleNavigate = () => {
+    navigate("/");
+  };
   return (
     <PostBox>
       <TitleContainer>
