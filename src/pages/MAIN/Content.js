@@ -1,8 +1,25 @@
 import styled from "styled-components";
 import GreyUser from "../../assets/images/greyuser.svg";
 import BlueUser from "../../assets/images/blueuser.svg";
+import { useState } from "react";
 
 const Content = ({ data }) => {
+  const currentTime = new Date();
+
+  const formatTime = (originTime) => {
+    const writtenTime = new Date(originTime);
+    const timeDiff = currentTime.getTime() - writtenTime.getTime();
+
+    if (timeDiff < 24 * 60 * 60 * 1000) {
+      const hour = writtenTime.getHours();
+      const min = writtenTime.getMinutes();
+      return `${hour}:${min}`;
+    } else {
+      const daysAgo = Math.floor(timeDiff / (24 * 60 * 60 * 1000));
+      return `${daysAgo}일전`;
+    }
+  };
+
   return data?.map((data) => (
     <PostBox key={data.id}>
       {data.isMine ? (
@@ -13,7 +30,7 @@ const Content = ({ data }) => {
       <DetailBox>
         <Title>제목: {data.title}</Title>
         <Detail>{data.content}</Detail>
-        <Time>{data.updatedAt}</Time>
+        <Time>{formatTime(data.createdAt)}</Time>
       </DetailBox>
     </PostBox>
   ));
