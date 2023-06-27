@@ -9,7 +9,7 @@ import Signup from "./pages/JOIN/Signup";
 import Main from "./pages/MAIN/Main";
 
 import Post from "./pages/POST/Post";
-import Content from "./pages/CONTENT/Content";
+import PostContent from "./pages/CONTENT/PostContent";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -35,7 +35,7 @@ function App() {
           <Route path="/Login" element={<Login isCheckLogin={setLoginKey} />} />
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Post" element={<Post />} />
-          <Route path="/Content" element={<Content />} />
+          <Route path="/Content/:id" element={<PostContent />} />
         </Routes>
       </Router>
     </ThemeProvider>

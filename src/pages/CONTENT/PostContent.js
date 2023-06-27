@@ -1,9 +1,14 @@
 import { useState } from "react";
+import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { AxiosGet } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
-const Post = () => {
+const PostContent = (data) => {
+  const { id } = useParams();
+  AxiosGet(id);
+
   const [titleText, setTitleText] = useState("");
   const [titleCount, setTitleCount] = useState(0);
 
@@ -24,21 +29,11 @@ const Post = () => {
     <PostBox>
       <TitleContainer>
         <Title>제목: </Title>
-        <TitleInput
-          onChange={handleTitleText}
-          maxLength={20}
-          spellCheck="false"
-        ></TitleInput>
-        <TitleCounting onChange={handleTitleText}>
-          ( {titleCount} / 20 )
-        </TitleCounting>
+        <TitleInput></TitleInput>
+        <TitleCounting>( {titleCount} / 20 )</TitleCounting>
       </TitleContainer>
       <DetailCotainer>
-        <DetailInput
-          onChange={handleDetailText}
-          maxLength={140}
-          spellCheck="false"
-        />
+        <DetailInput />
         <DetailCounting>( {detailCount} / 140 )</DetailCounting>
       </DetailCotainer>
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
@@ -75,7 +70,7 @@ const Title = styled.div`
   color: #000000;
 `;
 
-const TitleInput = styled.input`
+const TitleInput = styled.div`
   height: 24px;
   width: 561px;
   font-weight: 600;
@@ -104,7 +99,7 @@ const DetailCotainer = styled.div`
   border: 2px solid ${(props) => props.theme.colors.GRAY};
 `;
 
-const DetailInput = styled.textarea`
+const DetailInput = styled.div`
   width: 714px;
   height: 627px;
   font-weight: 500;
@@ -148,4 +143,4 @@ const WriteBtn = styled.div`
   justify-content: flex-end;
 `;
 
-export default Post;
+export default PostContent;
