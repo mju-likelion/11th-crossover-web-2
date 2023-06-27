@@ -1,44 +1,39 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { AxiosGet } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
 import { Theme } from "../../styles/Theme";
 
-const PostContent = (data) => {
+const PostContent = () => {
+  const [postData, setPostData] = useState({});
   const { id } = useParams();
-  AxiosGet(id);
-
-  const [titleText, setTitleText] = useState("");
-  const [titleCount, setTitleCount] = useState(0);
-
-  const handleTitleText = (e) => {
-    setTitleText(e.target.value);
-    setTitleCount(e.target.value.length);
+  useEffect(() => {
+    AxiosGet(id, handleData);
+  }, []);
+  const handleData = (data) => {
+    setPostData(data.data);
   };
-
-  const [detailText, setDetailText] = useState("");
-  const [detailCount, setDetailCount] = useState(0);
-
-  const handleDetailText = (e) => {
-    setDetailText(e.target.value);
-    setDetailCount(e.target.value.length);
-  };
-
   return (
     <PostBox>
       <TitleContainer>
         <Title>제목: </Title>
-        <TitleInput></TitleInput>
-        <TitleCounting>( {titleCount} / 20 )</TitleCounting>
+        <TitleInput>{postData.title}</TitleInput>
+        <TitleCounting>
+          ({postData.title ? postData.title.length : 0}/ 20 )
+        </TitleCounting>
       </TitleContainer>
       <DetailCotainer>
-        <DetailInput />
-        <DetailCounting>( {detailCount} / 140 )</DetailCounting>
+        <DetailInput>{postData.content} </DetailInput>
+        <DetailCounting>
+          ( {postData.content ? postData.content : 0} / 140 )
+        </DetailCounting>
       </DetailCotainer>
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
-        <SmallBtn color={Theme.colors.GRAY}>삭제하기</SmallBtn>
+        {postData.isMine && (
+          <SmallBtn color={Theme.colors.GRAY}>삭제하기</SmallBtn>
+        )}
       </WriteBtn>
     </PostBox>
   );

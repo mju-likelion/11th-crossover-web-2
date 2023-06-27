@@ -17,17 +17,16 @@ export const AxiosPost = async (data, handleNavigate) => {
   }
 };
 
-export const AxiosGet = async (data) => {
-  console.log(data);
+export const AxiosGet = async (data, handleData) => {
   try {
     const headers = {
       accept: "application/json",
       Authorization: `Bearer ${localStorage.getItem("key")}`,
     };
-    const res = await Axios.get(`/api/posts/${data}}`, {
+    const res = await Axios.get(`/api/posts/${data}`, {
       headers: headers,
     });
-    console.log(res);
+    handleData(res);
   } catch (error) {
     console.log(error);
   }
