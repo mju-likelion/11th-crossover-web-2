@@ -1,49 +1,35 @@
 import { Axios } from "./Axios";
-export const AxiosPost = async (data, handleNavigate) => {
+
+Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
+  "key"
+)}`;
+// const headers = {
+//   Authorization: `Bearer ${localStorage.getItem("key")}`,
+// };
+
+export const AxiosPost = async (data, handleNavigate, handleError) => {
   try {
-    const headers = {
-      accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("key")}`,
-    };
-    const res = await Axios.post(`/api/posts`, data, { headers: headers });
-    console.log(res);
+    const res = await Axios.post(`/api/posts`, data);
     handleNavigate();
-    alert("게시물작성이 완료되었습니다");
   } catch (error) {
-    console.log(error);
-    error.response.data.message.map((item) => {
-      alert(item);
-    });
+    handleError(error);
   }
 };
 
-export const AxiosGet = async (data, handleData) => {
+export const AxiosGet = async (data, handleData, handleError) => {
   try {
-    const headers = {
-      accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("key")}`,
-    };
-    const res = await Axios.get(`/api/posts/${data}`, {
-      headers: headers,
-    });
+    const res = await Axios.get(`/api/posts/${data}`);
     handleData(res);
   } catch (error) {
-    console.log(error);
+    handleError(error);
   }
 };
 
-export const AxiosDelete = async (data, handleNavigate) => {
+export const AxiosDelete = async (data, handleNavigate, handleError) => {
   try {
-    const headers = {
-      accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("key")}`,
-    };
-    const res = await Axios.delete(`/api/posts/${data}`, {
-      headers: headers,
-    });
-    alert("삭제가 완료 되었습니다");
+    const res = await Axios.delete(`/api/posts/${data}`);
     handleNavigate();
   } catch (error) {
-    alert(error.response.data.message[0]);
+    handleError(error);
   }
 };

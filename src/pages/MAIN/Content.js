@@ -4,7 +4,6 @@ import BlueUser from "../../assets/images/blueuser.svg";
 import { Link } from "react-router-dom";
 
 const Content = ({ data }) => {
-  console.log(data);
   return data?.map((item) => (
     <Link to={`/content/${item.id}`} key={item.id}>
       <PostBox key={item.id}>

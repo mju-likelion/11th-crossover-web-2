@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import SmallBtn from "../../components/SmallBtn";
-import { Theme } from "../../styles/Theme";
+
 import Content from "./Content";
 import { Axios } from "../../api/Axios";
 import { useState, useEffect } from "react";
@@ -20,7 +20,6 @@ const Main = () => {
   useEffect(() => {
     Axios("/api/posts", options)
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
       })
       .catch((err) => console.log(err));
@@ -30,7 +29,7 @@ const Main = () => {
     <Center>
       <WriteBtn>
         <Link to="/post">
-          <SmallBtn color={Theme.colors.BLUE2}>작성하기</SmallBtn>
+          <SmallBtn isfull={true}>작성하기</SmallBtn>
         </Link>
       </WriteBtn>
       <Content data={data} />

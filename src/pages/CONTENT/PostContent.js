@@ -3,26 +3,38 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { AxiosDelete, AxiosGet } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
-import { Theme } from "../../styles/Theme";
 
 const PostContent = () => {
   const [postData, setPostData] = useState({});
   const { id } = useParams();
   const navigate = useNavigate();
   useEffect(() => {
-    AxiosGet(id, handleData);
+    AxiosGet(id, handleData, handleError);
   }, []);
-  const handleData = (data) => {
-    setPostData(data.data);
+  const handleData = ({ data }) => {
+    setPostData(data);
+  };
+  const handleError = (error) => {
+    if (error.response.status == 401) {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+      navigate("/login");
+    } else {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+    }
   };
   const handleDelete = () => {
-    AxiosDelete(id, handleNavigate);
+    AxiosDelete(id, handleNavigate, handleError);
   };
   const handleNavigate = () => {
+    alert("삭제가 완료 되었습니다");
     navigate("/");
   };
   return (
-    <PostBox>
+    <PostContainer>
       <TitleContainer>
         <Title>제목: </Title>
         <TitleInput>{postData.title}</TitleInput>
@@ -39,16 +51,16 @@ const PostContent = () => {
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
         {postData.isMine && (
-          <SmallBtn click={handleDelete} color={Theme.colors.GRAY}>
+          <SmallBtn click={handleDelete} isdelete={true}>
             삭제하기
           </SmallBtn>
         )}
       </WriteBtn>
-    </PostBox>
+    </PostContainer>
   );
 };
 
-const PostBox = styled.div`
+const PostContainer = styled.div`
   width: 794px;
   height: 1092px;
   margin: auto;
