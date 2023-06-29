@@ -1,55 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { AxiosDelete, AxiosGet } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
-import { Theme } from "../../styles/Theme";
 
-const Post = () => {
-  const [titleText, setTitleText] = useState("");
-  const [titleCount, setTitleCount] = useState(0);
-
-  const handleTitleText = (e) => {
-    setTitleText(e.target.value);
-    setTitleCount(e.target.value.length);
+const PostContent = () => {
+  const [postData, setPostData] = useState({});
+  const { id } = useParams();
+  const navigate = useNavigate();
+  useEffect(() => {
+    AxiosGet(id, handleData, handleError);
+  }, []);
+  const handleData = ({ data }) => {
+    setPostData(data);
   };
-
-  const [detailText, setDetailText] = useState("");
-  const [detailCount, setDetailCount] = useState(0);
-
-  const handleDetailText = (e) => {
-    setDetailText(e.target.value);
-    setDetailCount(e.target.value.length);
+  const handleError = (error) => {
+    if (error.response.status == 401) {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+      navigate("/login");
+    } else {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+    }
   };
-
+  const handleDelete = () => {
+    AxiosDelete(id, handleNavigate, handleError);
+  };
+  const handleNavigate = () => {
+    alert("삭제가 완료 되었습니다");
+    navigate("/");
+  };
   return (
-    <PostBox>
+    <PostContainer>
       <TitleContainer>
         <Title>제목: </Title>
-        <TitleInput
-          onChange={handleTitleText}
-          maxLength={20}
-          spellCheck="false"
-        ></TitleInput>
-        <TitleCounting onChange={handleTitleText}>
-          ( {titleCount} / 20 )
+        <TitleInput>{postData.title}</TitleInput>
+        <TitleCounting>
+          ({postData.title ? postData.title.length : 0}/ 20 )
         </TitleCounting>
       </TitleContainer>
       <DetailCotainer>
-        <DetailInput
-          onChange={handleDetailText}
-          maxLength={140}
-          spellCheck="false"
-        />
-        <DetailCounting>( {detailCount} / 140 )</DetailCounting>
+        <DetailInput>{postData.content} </DetailInput>
+        <DetailCounting>
+          ( {postData.content ? postData.content.length : 0} / 140 )
+        </DetailCounting>
       </DetailCotainer>
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
-        <SmallBtn color={Theme.colors.GRAY}>삭제하기</SmallBtn>
+        {postData.isMine && (
+          <SmallBtn click={handleDelete} isdelete={true}>
+            삭제하기
+          </SmallBtn>
+        )}
       </WriteBtn>
-    </PostBox>
+    </PostContainer>
   );
 };
 
-const PostBox = styled.div`
+const PostContainer = styled.div`
   width: 794px;
   height: 1092px;
   margin: auto;
@@ -75,7 +86,7 @@ const Title = styled.div`
   color: #000000;
 `;
 
-const TitleInput = styled.input`
+const TitleInput = styled.div`
   height: 24px;
   width: 561px;
   font-weight: 600;
@@ -104,7 +115,7 @@ const DetailCotainer = styled.div`
   border: 2px solid ${(props) => props.theme.colors.GRAY};
 `;
 
-const DetailInput = styled.textarea`
+const DetailInput = styled.div`
   width: 714px;
   height: 627px;
   font-weight: 500;
@@ -148,4 +159,4 @@ const WriteBtn = styled.div`
   justify-content: flex-end;
 `;
 
-export default Post;
+export default PostContent;

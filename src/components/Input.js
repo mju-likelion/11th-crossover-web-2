@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Theme } from "../styles/Theme";
 import Error from "../assets/images/Error";
 import Cancel from "../assets/images/Cancel";
 import Success from "../assets/images/Success";
@@ -58,13 +57,13 @@ const InputContainer = styled.div`
   border: 2px solid
     ${(props) => {
       if (props.page == "signup") {
-        if (props.value && !props.errorscheck) return Theme.colors.GREEN;
-        else if (props.errorscheck) return Theme.colors.RED;
-        else return Theme.colors.GRAY;
+        if (props.value && !props.errorscheck) return props.theme.colors.GREEN;
+        else if (props.errorscheck) return props.theme.colors.RED;
+        else return props.theme.colors.GRAY;
       } else {
-        if (props.errorscheck) return Theme.colors.RED;
+        if (props.errorscheck) return props.theme.colors.RED;
         else {
-          return Theme.colors.GRAY;
+          return props.theme.colors.GRAY;
         }
       }
     }};
@@ -84,13 +83,13 @@ const InputText = styled.input`
   line-height: 28px;
   color: ${(props) => {
     if (props.page == "signup") {
-      if (props.value && !props.errorscheck) return Theme.colors.GREEN;
-      else if (props.errorscheck) return Theme.colors.RED;
-      else return Theme.colors.GRAY;
+      if (props.value && !props.errorscheck) return props.theme.colors.GREEN;
+      else if (props.errorscheck) return props.theme.colors.RED;
+      else return props.theme.colors.GRAY;
     } else {
-      if (props.errorscheck) return Theme.colors.RED;
+      if (props.errorscheck) return props.theme.colors.RED;
       else {
-        return Theme.colors.GRAY;
+        return props.theme.colors.GRAY;
       }
     }
   }};

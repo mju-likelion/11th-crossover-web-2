@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { AxiosPost } from "../../api/Post";
 import SmallBtn from "../../components/SmallBtn";
-import { Theme } from "../../styles/Theme";
 
 const Post = () => {
   const navigate = useNavigate();
@@ -22,11 +21,28 @@ const Post = () => {
     setDetailText(e.target.value);
     setDetailCount(e.target.value.length);
   };
+  const handleError = (error) => {
+    if (error.response.status == 401) {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+      navigate("/login");
+    } else {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+    }
+  };
 
   const handleClick = () => {
-    AxiosPost({ title: titleText, content: detailText }, handleNavigate);
+    AxiosPost(
+      { title: titleText, content: detailText },
+      handleNavigate,
+      handleError
+    );
   };
   const handleNavigate = () => {
+    alert("게시물작성이 완료되었습니다");
     navigate("/");
   };
   return (
@@ -52,12 +68,7 @@ const Post = () => {
       </DetailCotainer>
       <Warning>※ 작성된 게시글은 수정이 불가합니다.</Warning>
       <WriteBtn>
-        <SmallBtn
-          click={handleClick}
-          color={
-            titleText && detailText ? Theme.colors.BLUE2 : Theme.colors.BLUE1
-          }
-        >
+        <SmallBtn click={handleClick} isfull={titleText && detailText}>
           작성하기
         </SmallBtn>
       </WriteBtn>
