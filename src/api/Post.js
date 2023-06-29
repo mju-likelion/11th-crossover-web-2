@@ -11,6 +11,7 @@ export const AxiosPost = async (data, handleNavigate, handleError) => {
   try {
     const res = await Axios.post(`/api/posts`, data);
     handleNavigate();
+    alert("게시물 작성이 완료되었습니다");
   } catch (error) {
     handleError(error);
   }
