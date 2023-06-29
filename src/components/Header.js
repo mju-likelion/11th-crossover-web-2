@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { Axios } from "../api/Axios";
 import Airplane from "../assets/images/airplane.svg";
 import Logout from "../assets/images/logout.svg";
 
@@ -17,6 +18,7 @@ const Header = (props) => {
   const handleLogin = () => {
     localStorage.removeItem("key");
     isCheckLogin(false);
+    Axios.defaults.headers.common["Authorization"] = null;
     alert("로그아웃 하셨습니다!");
     navigate("/login");
   };

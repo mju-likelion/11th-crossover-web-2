@@ -1,16 +1,8 @@
 import { Axios } from "./Axios";
 
-const accessToken = localStorage.getItem("key");
-
-const headers = {
-  Authorization: accessToken ? `Bearer ${accessToken}` : "",
-};
-// Axios.defaults.headers.common["Authorization"] = `Bearer ${localStorage.getItem(
-//   "key"
-// )}`;
 export const AxiosPost = async (data, handleNavigate, handleError) => {
   try {
-    const res = await Axios.post(`/api/posts`, data, { headers });
+    const res = await Axios.post(`/api/posts`, data);
     console.log(headers);
     handleNavigate();
   } catch (error) {
@@ -20,7 +12,7 @@ export const AxiosPost = async (data, handleNavigate, handleError) => {
 
 export const AxiosGet = async (data, handleData, handleError) => {
   try {
-    const res = await Axios.get(`/api/posts/${data}`, { headers });
+    const res = await Axios.get(`/api/posts/${data}`);
     handleData(res);
   } catch (error) {
     handleError(error);
@@ -29,7 +21,7 @@ export const AxiosGet = async (data, handleData, handleError) => {
 
 export const AxiosDelete = async (data, handleNavigate, handleError) => {
   try {
-    const res = await Axios.delete(`/api/posts/${data}`, { headers });
+    const res = await Axios.delete(`/api/posts/${data}`);
     handleNavigate();
   } catch (error) {
     handleError(error);
@@ -42,11 +34,13 @@ export const AxiosMain = async (
   { getDataSuccess, setPageNumber }
 ) => {
   try {
-    const res = await Axios.get("/api/posts", { headers, params: { page } });
+    const res = await Axios.get("/api/posts", {
+      params: { page },
+    });
     getDataSuccess(res);
     setPageNumber();
   } catch (error) {
-    console.log("123");
+    console.log(error);
     handleError(error);
   }
 };
