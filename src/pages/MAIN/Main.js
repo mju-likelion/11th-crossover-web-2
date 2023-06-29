@@ -3,8 +3,8 @@ import styled from "styled-components";
 import SmallBtn from "../../components/SmallBtn";
 
 import Content from "./Content";
-import { Axios } from "../../api/Axios";
 import { useState, useEffect } from "react";
+import { Axios } from "../../api/Axios";
 
 const Main = () => {
   const [data, setData] = useState([]);
