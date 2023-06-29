@@ -10,7 +10,7 @@ import { AxiosLogin } from "../../api/Login";
 import { useNavigate } from "react-router-dom";
 
 export default function Login(props) {
-  const { isCheckLogin } = props;
+  const { isLogin } = props;
   const [checkLogin, setCheckLogin] = useState(false);
   const navigate = useNavigate();
   const schema = yup.object().shape({
@@ -42,13 +42,11 @@ export default function Login(props) {
 
   const onSubmit = (data) => {
     AxiosLogin(data, callbackFunction);
-    console.log(data);
   };
 
   const handleClick = () => {
     if (checkLogin == false) {
       setCheckLogin(true);
-      isCheckLogin(true);
     }
   };
 
@@ -60,6 +58,7 @@ export default function Login(props) {
 
   const callbackFunction = (data) => {
     localStorage.setItem("key", data);
+    isLogin(true);
     alert("로그인에 성공하셨습니다.");
     navigate("/");
   };
