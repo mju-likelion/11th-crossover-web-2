@@ -2,7 +2,6 @@ import styled from "styled-components";
 import GreyUser from "../../assets/images/greyuser.svg";
 import BlueUser from "../../assets/images/blueuser.svg";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 const Content = ({ data }) => {
   const currentTime = new Date();
@@ -24,21 +23,21 @@ const Content = ({ data }) => {
     }
   };
 
-  return data?.map((item) => (
-        <Link to={`/content/${item.id}`} key={item.id}>
-    <PostBox key={item.id}>
-      {item.isMine ? (
-        <BlueUserImg src={BlueUser} alt="BlueUserImg" />
-      ) : (
-        <GreyUserImg src={GreyUser} alt="GreyUserImg" />
-      )}
-      <DetailBox>
-        <Title>제목: {item.title}</Title>
-        <Detail>{item.content}</Detail>
-        <Time>{formatTime(item.createdAt)}</Time>
-      </DetailBox>
-    </PostBox>
-     </Link>
+  return data?.map((item, index) => (
+    <Link to={`/content/${item.id}`} key={index}>
+      <PostBox>
+        {item.isMine ? (
+          <BlueUserImg src={BlueUser} alt="BlueUserImg" />
+        ) : (
+          <GreyUserImg src={GreyUser} alt="GreyUserImg" />
+        )}
+        <DetailBox>
+          <Title>제목: {item.title}</Title>
+          <Detail>{item.content}</Detail>
+          <Time>{formatTime(item.createdAt)}</Time>
+        </DetailBox>
+      </PostBox>
+    </Link>
   ));
 };
 

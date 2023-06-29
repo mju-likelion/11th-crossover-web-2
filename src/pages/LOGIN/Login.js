@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
@@ -8,10 +8,12 @@ import LargeBtn from "../../components/LargeBtn";
 import { Link } from "react-router-dom";
 import { AxiosLogin } from "../../api/Login";
 import { useNavigate } from "react-router-dom";
+import { Axios } from "../../api/Axios";
 
 export default function Login(props) {
   const { isLogin } = props;
   const [checkLogin, setCheckLogin] = useState(false);
+  const [token, setToken] = useState();
   const navigate = useNavigate();
   const schema = yup.object().shape({
     id: yup
