@@ -1,29 +1,52 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import SmallBtn from "../../components/SmallBtn";
 
 import Content from "./Content";
 import { useState, useEffect } from "react";
-import { Axios } from "../../api/Axios";
+import { AxiosMain } from "../../api/Post";
 
 const Main = () => {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
+  const navigate = useNavigate();
+  useEffect(() => {
+    AxiosMain(handleError, page, callbackFunctions);
+  }, []);
 
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${localStorage.getItem("key")}`,
+  const handleError = (error) => {
+    if (error.response.status == 401) {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+      navigate("/login");
+    } else {
+      error.response.data.message.map((item) => {
+        alert(item);
+      });
+    }
+  };
+
+  const callbackFunctions = {
+    getDataSuccess: ({ data }) => {
+      setData((item) => [...item, ...data]);
     },
+    setPageNumber: () => setPage((prev) => prev + 1),
   };
 
   useEffect(() => {
-    Axios("/api/posts", options)
-      .then((res) => {
-        setData(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight
+      ) {
+        AxiosMain(handleError, page, callbackFunctions);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [page]);
 
   return (
     <Center>

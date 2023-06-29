@@ -10,7 +10,6 @@ import Main from "./pages/Main/Main";
 import Post from "./pages/Post/Post";
 import PostContent from "./pages/Content/PostContent";
 
-
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 

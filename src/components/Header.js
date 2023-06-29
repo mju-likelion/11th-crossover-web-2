@@ -7,6 +7,12 @@ import Logout from "../assets/images/logout.svg";
 const Header = (props) => {
   const { isLoggedin, isCheckLogin } = props;
   const navigate = useNavigate();
+  const [isValid, setIsValid] = useState(false);
+  const accessToken = localStorage.getItem("key");
+
+  useEffect(() => {
+    accessToken ? setIsValid(true) : setIsValid(false);
+  }, [accessToken]);
 
   const handleLogin = () => {
     localStorage.removeItem("key");
@@ -14,15 +20,18 @@ const Header = (props) => {
     alert("로그아웃 하셨습니다!");
     navigate("/login");
   };
+
+  const handleValidLogin = () => {
+    isValid ? navigate("/") : navigate("/login");
+  };
+
   return (
     <HeaderBar>
       <Align>
-        <Link to="/">
-          <Logo>
-            <LogoText>비행기레터</LogoText>
-            <AirPlaneImg src={Airplane} alt="AirplaneImg" />
-          </Logo>
-        </Link>
+        <Logo onClick={handleValidLogin}>
+          <LogoText>비행기레터</LogoText>
+          <AirPlaneImg src={Airplane} alt="AirplaneImg" />
+        </Logo>
 
         {isLoggedin && (
           <LogoutBtn onClick={handleLogin}>
@@ -50,7 +59,7 @@ const Align = styled.div`
   justify-content: space-between;
 `;
 
-const Logo = styled.div`
+const Logo = styled.button`
   display: flex;
 `;
 
