@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../../components/Input";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,7 @@ import { Axios } from "../../api/Axios";
 export default function Login(props) {
   const { isLogin } = props;
   const [checkLogin, setCheckLogin] = useState(false);
-  const [token, setToken] = useState();
+
   const navigate = useNavigate();
   const schema = yup.object().shape({
     id: yup
@@ -60,6 +60,7 @@ export default function Login(props) {
 
   const callbackFunction = (data) => {
     localStorage.setItem("key", data);
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${data}`;
     isLogin(true);
     alert("로그인에 성공하셨습니다.");
     navigate("/");
