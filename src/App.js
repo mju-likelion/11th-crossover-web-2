@@ -4,12 +4,12 @@ import "./App.css";
 import GlobalStyle from "./styles/GlobalStyle";
 import Header from "./components/Header";
 
-import Login from "./pages/LOGIN/Login";
-import Signup from "./pages/JOIN/Signup";
-import Main from "./pages/MAIN/Main";
+import Login from "./pages/Login/Login";
+import Signup from "./pages/Join/Signup";
+import Main from "./pages/Main/Main";
 
-import Post from "./pages/POST/Post";
-import Content from "./pages/CONTENT/Content";
+import Post from "./pages/Post/Post";
+import Content from "./pages/Content/Content";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";

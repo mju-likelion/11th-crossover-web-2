@@ -9,7 +9,7 @@ export const AxiosPost = async (data, handleNavigate) => {
     const res = await Axios.post(`/api/posts`, data, { headers: headers });
     console.log(res);
     handleNavigate();
-    alert("게시물작성이 완료되었습니다");
+    alert("게시물 작성이 완료되었습니다");
   } catch (error) {
     console.log(error);
     error.response.data.message.map((item) => {
