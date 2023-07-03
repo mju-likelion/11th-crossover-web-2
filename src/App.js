@@ -28,7 +28,11 @@ function App() {
     <ThemeProvider theme={Theme}>
       <GlobalStyle />
       <Router>
-        <Header isLoggedin={loginKey} isCheckLogin={setLoginKey} />
+        <Header
+          isLoggedin={loginKey}
+          isCheckLogin={setLoginKey}
+          accessToken={accessKey}
+        />
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/Login" element={<Login isLogin={setLoginKey} />} />

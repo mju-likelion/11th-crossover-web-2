@@ -3,7 +3,6 @@ import { Axios } from "./Axios";
 export const AxiosPost = async (data, handleNavigate, handleError) => {
   try {
     const res = await Axios.post(`/api/posts`, data);
-    console.log(headers);
     handleNavigate();
   } catch (error) {
     handleError(error);
@@ -40,7 +39,6 @@ export const AxiosMain = async (
     getDataSuccess(res);
     setPageNumber();
   } catch (error) {
-    console.log(error);
     handleError(error);
   }
 };

@@ -6,19 +6,22 @@ import Airplane from "../assets/images/airplane.svg";
 import Logout from "../assets/images/logout.svg";
 
 const Header = (props) => {
-  const { isLoggedin, isCheckLogin } = props;
+  const { isLoggedin, isCheckLogin, accessToken } = props;
   const navigate = useNavigate();
   const [isValid, setIsValid] = useState(false);
-  const accessToken = localStorage.getItem("key");
 
   useEffect(() => {
     accessToken ? setIsValid(true) : setIsValid(false);
   }, [accessToken]);
 
+  useEffect(() => {
+    Axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`;
+  });
+
   const handleLogin = () => {
     localStorage.removeItem("key");
     isCheckLogin(false);
-    Axios.defaults.headers.common["Authorization"] = null;
+    Axios.defaults.headers.common["Authorization"] = "";
     alert("로그아웃 하셨습니다!");
     navigate("/login");
   };
